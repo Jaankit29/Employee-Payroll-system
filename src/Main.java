@@ -68,7 +68,18 @@ class PayrollSystem {
     public void addEmployee(Employee employee) {
         employeeList.add(employee);
     }
-
+    public void viewEmployee(int id){
+        Employee employeeToDisplay=null;
+        for(Employee employee:employeeList){
+            if(employee.getId()==id){
+                employeeToDisplay=employee;
+                break;
+            }
+        }
+        if(employeeToDisplay==null)
+            System.out.println("failed to find employee");
+        else System.out.println(employeeToDisplay);
+    }
     public void removeEmployee(int id) {
         Employee employeeToRemove = null;
         for (Employee employee : employeeList) {
@@ -84,13 +95,20 @@ class PayrollSystem {
             System.out.println("failed to delete employee !");
         }
     }
-
     public void displayEmployees() {
         System.out.println();
         for (Employee employee : employeeList) {
             System.out.println(employee);
         }
         System.out.println();
+    }
+    public boolean isEmployeeExist(String name,int id){
+        for(Employee emp:employeeList){
+            if(emp.getId()==id && emp.getName().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+        return false;
     }
 }
 
@@ -126,11 +144,32 @@ public class Main {
 
             case 1 : payrollSystem.displayEmployees();
                     break;
-
-            case 2 :{
+            case 2:
+            {
+                System.out.print("enter the id of the employee: ");
+                int id=scanner.nextInt();
+                payrollSystem.viewEmployee(id);
+                break;
+            }
+            case 3 :{
                 System.out.print("enter the id of employee you want to delete : ");
                 int id=scanner.nextInt();
                 payrollSystem.removeEmployee(id);
+                break;
+            }
+            case 4 :{
+                System.out.print("enter the id of the employee: ");
+                int id=scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("enter the name of the employee: ");
+                String name=scanner.nextLine();
+                boolean exist=payrollSystem.isEmployeeExist(name,id);
+                if(exist){
+                    System.out.println("the employee exist");
+                    payrollSystem.viewEmployee(id);
+                }else{
+                    System.out.println("this employee doesn't exist !");
+                }
                 break;
             }
             default:
@@ -138,7 +177,7 @@ public class Main {
                 break;
         }
 
-        payrollSystem.displayEmployees();
+        //payrollSystem.displayEmployees();
    /*     System.out.println("\nRemoving Employee...");
         payrollSystem.removeEmployee(101);
 
@@ -147,6 +186,8 @@ public class Main {
     }
     static void menu(){
         System.out.println("|1| : View current employees");
-        System.out.println("|2| : delete an employee");
+        System.out.println("|2| : View an employee");
+        System.out.println("|3| : delete an employee");
+        System.out.println("|4| : is employee exists?");
     }
 }
