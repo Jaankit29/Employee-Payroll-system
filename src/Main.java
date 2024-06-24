@@ -244,6 +244,23 @@ class PayrollSystem {
             return result;
         }
     }
+    public void removeMultipleEmployees(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.print("enter the number of employees to remove: ");
+        int n=scanner.nextInt();
+        if(n<=0){
+            System.out.println("oops! invalid number");
+        }else if(n>employeeList.size()){
+            System.out.println("oops! we have just "+employeeList.size()+" employees");
+        }else{
+            System.out.println("enter IDs of "+n+ " employees to remove");
+            for(int i=0;i<n;i++){
+                System.out.print("-> ");
+                int id=scanner.nextInt();
+                removeEmployee(id);
+            }
+        }
+    }
 }
 
 public class Main {
@@ -322,6 +339,10 @@ public class Main {
                    break;
                }
                case 7 :{
+                   payrollSystem.removeMultipleEmployees();
+                   break;
+               }
+               case 8:{
                    System.out.println("THANK YOU FOR USING EMPLOYEE PAYROLL SYSTEM !");
                    return;
                }
