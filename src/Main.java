@@ -23,6 +23,12 @@ abstract class Employee {
 
     // Abstract method to be implemented by subclasses
     public abstract double calculateSalary();
+
+    /**
+     * user can modify an employee according to its type FullTimeEmployee or PartTimeEmployee
+     * @param scanner
+     * @param oldEmployee
+     */
     public abstract void modifyEmp(Scanner scanner,Employee oldEmployee);
     @Override
     public String toString() {
@@ -176,6 +182,13 @@ class PayrollSystem {
         }
         System.out.println();
     }
+
+    /**
+     * user can check whether an employee exists or not according to the given name and id
+     * @param name
+     * @param id
+     * @return returns true if the employee exists, and false otherwise
+     */
     public boolean isEmployeeExist(String name,int id){
         for(Employee emp:employeeList){
             if(emp.getId()==id && emp.getName().equalsIgnoreCase(name)){
